@@ -4,9 +4,9 @@ Code editor written in HTML and CSS using FLask
 ## Overview
 Here's an overview of the components we'll need:
 
-Frontend: HTML, CSS, and JavaScript with Ace editor
-Backend: Flask server to handle code execution
-AJAX to communicate between frontend and backend
+- Frontend: HTML, CSS, and JavaScript with Ace editor
+- Backend: Flask server to handle code execution
+- AJAX to communicate between frontend and backend
 
 ## Setup
 Git clone current repo on your local
