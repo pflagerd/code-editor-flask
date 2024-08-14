@@ -13,7 +13,8 @@ Git clone current repo on your local
 ```bash
 git clone https://github.com/KevinJudith/code-editor-flask.git
 ```
-Move to `code-editor-flask` repository
+Move to code-editor-flask repository
+`cd path/to/code-editor-flask`
 
 launch python virtual environment
 ```bash
