@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Online Editor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .container {
+            display: flex;
+        }
+        #editor {
+            height: 300px;
+            width: 50%; /* Adjust width as needed */
+            font-size: 18px;
+            font-family: monospace;
+        }
+        #output {
+            height: 300px; /* Match height with editor */
+            width: 50%; /* Adjust width as needed */
+            background-color: black; /* Dark background color */
+            color: white; /* White text color for contrast */
+            overflow-y: auto; /* Enable scrolling if content exceeds height */
+            font-size: 18px;
+            font-family: monospace;
+            padding-left: 10px;
+            color: rgb(70, 242, 70);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="editor" contenteditable="true"></div>
+        <div id="output"></div>
+    </div>
+    <div class="btn-container">
+        <button class="black-button" id="runButton">
+            <span id="buttonText">Run</span>
+            <i class="fas fa-circle-notch fa-spin" id="loadingIcon" style="display: none; margin-left: 10px;"></i>
+        </button>  
+    </div>
+
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/python");
+
+        $("#runButton").click(function() {
+            var code = editor.getValue();
+            $.ajax({
+                url: '/run',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({code: code}),
+                success: function(response) {
+                    $("#output").text(response.output);
+                }
+            });
+        });
+    </script>
+    <script>
+        document.getElementById("runButton").addEventListener("click", function() {
+            var loadingIcon = document.getElementById("loadingIcon");
+
+            // Show the loading icon
+            loadingIcon.style.display = "inline-block";
+
+            // Hide the loading icon after 2 seconds
+            setTimeout(function() {
+                loadingIcon.style.display = "none";
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
