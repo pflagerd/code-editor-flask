@@ -1,4 +1,4 @@
-![Alt Text](./image.png)
+![Online Editor](./image.png)
 
 # code-editor-flask
 Code editor written in HTML and CSS using FLask
