@@ -16,7 +16,7 @@ git clone https://github.com/KevinJudith/code-editor-flask.git
 Move to code-editor-flask repository
 `cd path/to/code-editor-flask`
 
-launch python virtual environment
+Launch python virtual environment
 ```bash
 python3 -m menv myenv
 ```
