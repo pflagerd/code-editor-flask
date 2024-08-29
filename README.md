@@ -18,23 +18,36 @@ git clone https://github.com/KevinJudith/code-editor-flask.git
 Move to code-editor-flask repository
 `cd path/to/code-editor-flask`
 
-Launch python virtual environment
+Install gunicorn, which will help you to run a HTTP server locally
+```bash
+pip install unicorn
+```
+Launch a local server with gunicorn
+```bash
+gunicorn app:app
+```
+You should see something like:
+```
+[2024-08-29 15:59:51 +0800] [95086] [INFO] Starting gunicorn 23.0.0
+[2024-08-29 15:59:51 +0800] [95086] [INFO] Listening at: http://127.0.0.1:8000 (95086)
+[2024-08-29 15:59:51 +0800] [95086] [INFO] Using worker: sync
+[2024-08-29 15:59:51 +0800] [95087] [INFO] Booting worker with pid: 95087
+```
+
+Alternatively, you can also setup a python virtual environment
 ```bash
 python3 -m menv myenv
 ```
-Launch application
-```bash
-python app.py
-```
-You should see something like 
-``` Serving Flask app 'app'
- * Debug mode: on
-WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
- * Running on http://127.0.0.1:5000
-Press CTRL+C to quit
- * Restarting with watchdog (fsevents)
- * Debugger is active!
- * Debugger PIN: 841-362-026
-   ```
 
+This app has been deployed to https://render.com/
 
+To deploy properly the app, you need the following files to indicate Render PaaS how to deploy your app using Flask and gunicorn
+
+- requirements.txt
+flask
+flask-cors
+gunicorn
+- runtime.txt
+python-3.12
+- Procfile
+web: gunicorn app:app
