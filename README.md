@@ -45,10 +45,10 @@ This app has been deployed to https://render.com/
 To deploy properly the app, you need the following files to indicate Render PaaS how to deploy your app using Flask and gunicorn
 
 - requirements.txt
-- - flask
-- - flask-cors
-- - gunicorn
+-- flask
+-- flask-cors
+-- gunicorn
 - runtime.txt
-- -python-3.12
+-- python-3.12
 - Procfile
-- - web: gunicorn app:app
+-- web: gunicorn app:app
