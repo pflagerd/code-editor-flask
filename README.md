@@ -12,7 +12,7 @@ Here's an overview of the components we'll need:
 - HTTP server with gunicorn
 
 ## Setup
-Git clone current repo on your local
+Git clone current repo to your local machine
 ```bash
 git clone https://github.com/KevinJudith/code-editor-flask.git
 ```
