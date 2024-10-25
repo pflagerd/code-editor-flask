@@ -1,5 +1,3 @@
-![Online Editor](./images/screenshot.png)
-
 # code-editor-flask
 Code editor written in HTML and CSS using FLask
 
@@ -55,4 +53,6 @@ Press CTRL+C to quit
 
 From a browser navigate to `http://127.0.0.1:5000` (or whatever Flask said when you ran it.)
 
-​	
+You should see something like this:
+
+![Online Editor](./images/screenshot.png)
