@@ -7,14 +7,15 @@ Code editor written in HTML and CSS using FLask
 Here's an overview of the components we'll need:
 
 - Frontend: HTML, CSS, and JavaScript with Ace editor
+
 - Backend: Flask to handle code execution
-- AJAX to communicate between frontend and backend
-- HTTP server with gunicorn
+
+  
 
 ## Setup
 Git clone current repo to your local machine
 
-​	`git clone https://github.com/KevinJudith/code-editor-flask.git`
+​	`git clone https://github.com/pflagerd/code-editor-flask.git`
 
 Move to code-editor-flask repository
 
@@ -27,6 +28,10 @@ Create a `.venv` virtual environment
 Activate the `.venv`
 
 ​	`source .venv/bin/activate`
+
+Install required packages from `requirements.txt`
+
+​	`pip install -r ./requirements.txt`
 
 Run `code-editor-flask.py` (runs `code-editor-flask.py` in a flask web server)
 ```bash
@@ -48,4 +53,6 @@ Press CTRL+C to quit
 127.0.0.1 - - [25/Oct/2024 09:33:03] "POST /run HTTP/1.1" 200 -
 ```
 
-From a browser navigate to `http://127.0.0.1:500` 
+From a browser navigate to `http://127.0.0.1:5000` (or whatever Flask said when you ran it.)
+
+​	
