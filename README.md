@@ -20,17 +20,17 @@ Move to code-editor-flask repository
 
 ​	`cd path/to/code-editor-flask`
 
-Create a .venv directory
+Create a `.venv` virtual environment
 
 ​	`python -m venv .venv`
 
-Activate the .venv
+Activate the `.venv`
 
 ​	`source .venv/bin/activate`
 
-Launch `app.py`
+Run `code-editor-flask.py` (runs `code-editor-flask.py` in a flask web server)
 ```bash
-python ./app.py
+python ./code-editor-flask.py
 ```
 You should see something like:
 ```
@@ -46,5 +46,6 @@ Press CTRL+C to quit
 127.0.0.1 - - [25/Oct/2024 09:32:42] "GET /static/styles.css HTTP/1.1" 200 -
 127.0.0.1 - - [25/Oct/2024 09:32:42] "GET /static/atom.ico HTTP/1.1" 200 -
 127.0.0.1 - - [25/Oct/2024 09:33:03] "POST /run HTTP/1.1" 200 -
-
 ```
+
+From a browser navigate to `http://127.0.0.1:500` 
