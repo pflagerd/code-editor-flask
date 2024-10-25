@@ -1,4 +1,4 @@
-![Online Editor](./image-editor.png)
+![Online Editor](./images/screenshot.png)
 
 # code-editor-flask
 Code editor written in HTML and CSS using FLask
@@ -13,42 +13,38 @@ Here's an overview of the components we'll need:
 
 ## Setup
 Git clone current repo to your local machine
-```bash
-git clone https://github.com/KevinJudith/code-editor-flask.git
-```
-Move to code-editor-flask repository
-`cd path/to/code-editor-flask`
 
-Install gunicorn, which will help you to run a HTTP server locally
+​	`git clone https://github.com/KevinJudith/code-editor-flask.git`
+
+Move to code-editor-flask repository
+
+​	`cd path/to/code-editor-flask`
+
+Create a .venv directory
+
+​	`python -m venv .venv`
+
+Activate the .venv
+
+​	`source .venv/bin/activate`
+
+Launch `app.py`
 ```bash
-pip install gunicorn
-```
-Launch a local server with gunicorn
-```bash
-gunicorn app:app
+python ./app.py
 ```
 You should see something like:
 ```
-[2024-08-29 15:59:51 +0800] [95086] [INFO] Starting gunicorn 23.0.0
-[2024-08-29 15:59:51 +0800] [95086] [INFO] Listening at: http://127.0.0.1:8000 (95086)
-[2024-08-29 15:59:51 +0800] [95086] [INFO] Using worker: sync
-[2024-08-29 15:59:51 +0800] [95087] [INFO] Booting worker with pid: 95087
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 259-072-464
+127.0.0.1 - - [25/Oct/2024 09:32:42] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [25/Oct/2024 09:32:42] "GET /static/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [25/Oct/2024 09:32:42] "GET /static/atom.ico HTTP/1.1" 200 -
+127.0.0.1 - - [25/Oct/2024 09:33:03] "POST /run HTTP/1.1" 200 -
+
 ```
-
-Alternatively, you can also setup a python virtual environment
-```bash
-python3 -m menv myenv
-```
-
-This app has been deployed to https://render.com/
-
-To deploy properly the app, you need the following files to indicate Render PaaS how to deploy your app using Flask and gunicorn
-
-- requirements.txt
--- flask
--- flask-cors
--- gunicorn
-- runtime.txt
--- python-3.12
-- Procfile
--- web: gunicorn app:app
