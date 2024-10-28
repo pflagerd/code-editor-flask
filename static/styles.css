@@ -50,5 +50,6 @@
     font-family: monospace;
     padding-left: 10px;
     color: rgb(70, 242, 70);
+    white-space: pre-wrap;
 
 }
