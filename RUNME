@@ -1,0 +1,6 @@
+#!/bin/bash
+if ! which python >/dev/null; then
+  echo "You must have python 3 installed to run this."
+  exit 1
+fi
+
