@@ -1,6 +1,7 @@
 #!/bin/bash
-if ! which python >/dev/null; then
+if ! (which python >/dev/null && python --version | grep ' 3.' >/dev/null); then
   echo "You must have python 3 installed to run this."
   exit 1
 fi
 
+python $(dirname "$(readlink -f "$0")")/runme.py
