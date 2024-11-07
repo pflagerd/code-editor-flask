@@ -44,7 +44,7 @@ def main(args):
 
     os.chdir(script_directory)
     stdout = spawn(".venv/bin/pip freeze")['stdout']
-    print(f'stdout ==  {stdout}')
+    # print(f'stdout == {stdout}')
 
     if not stdout:
         os.chdir(script_directory)
