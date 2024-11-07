@@ -63,5 +63,5 @@ if not process.stdout.decode('utf-8'):
     print(process.stderr.decode('utf-8'))
     print(process.returncode)
 
-os.system("google-chrome --new-window http://localhost:5000")
+os.system("open http://localhost:5000")
 os.execvp(".venv/bin/python", [".venv/bin/python", "./code-editor-flask.py"])
