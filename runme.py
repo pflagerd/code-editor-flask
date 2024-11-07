@@ -25,12 +25,14 @@ def main(args, debug=False):
         print("Current version " + sys.version.split()[0] + " is too old.  Must be 3.12.3 or later.", file=sys.stderr)
         sys.exit(1)
 
-    # print(__file__)
-    # print(os.path.abspath(__file__))
+    if debug:
+        print(__file__)
+        print(os.path.abspath(__file__))
 
     script_directory = os.path.dirname(os.path.abspath(__file__))
     os.chdir(script_directory)
-    # print(script_directory)  # Does script_directory contain a trailing '/'?  No.
+    if debug:
+        print(script_directory)  # Does script_directory contain a trailing '/'?  No.
     if not os.path.exists(script_directory + "/.venv"):  # if
         spawn_result = spawn("python -m venv .venv")
         if debug:
