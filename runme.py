@@ -43,19 +43,10 @@ def main(args):
         print(str(spawn("python -m venv .venv")))
 
     os.chdir(script_directory)
-    print(str(spawn(".venv/bin/pip freeze")))
-    # # python -m venv .venv
-    # process = subprocess.run(
-    #     ".venv/bin/pip freeze".split(),
-    #     stdout=subprocess.PIPE,
-    #     stderr=subprocess.PIPE
-    # )
-    #
-    # print(process.stdout.decode('utf-8'))
-    # print(process.stderr.decode('utf-8'))
-    # print(process.returncode)
+    stdout = spawn(".venv/bin/pip freeze")['stdout']
+    print(f'stdout ==  {stdout}')
 
-    if not process.stdout.decode('utf-8'):
+    if not stdout:
         os.chdir(script_directory)
         # python -m venv .venv
         process = subprocess.run(
