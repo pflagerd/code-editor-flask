@@ -28,20 +28,16 @@ def main(args):
     # print(os.path.abspath(__file__))
 
     script_directory = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(script_directory)
     # print(script_directory)  # Does script_directory contain a trailing '/'?  No.
     if not os.path.exists(script_directory + "/.venv"):  # if
-        os.chdir(script_directory)
         print(str(spawn("python -m venv .venv")))
 
-    os.chdir(script_directory)
     stdout = spawn(".venv/bin/pip freeze").stdout
     # print(f'stdout == {stdout}')
 
     if not stdout:
-        os.chdir(script_directory)
-        print(spawn(".venv/bin/pip freeze"))
-
-        spawn(".venv/bin/python ./code-editor-flask.py")
+        print(spawn(".venv/bin/pip install -r requirements.txt"))
 
     os.system("open http://localhost:5000")
     os.execvp(".venv/bin/python", [".venv/bin/python", "./code-editor-flask.py"])
