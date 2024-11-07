@@ -2,6 +2,7 @@
 import os
 import sys
 import subprocess
+from types import SimpleNamespace
 
 
 def spawn(command_line):
@@ -11,10 +12,11 @@ def spawn(command_line):
         stderr=subprocess.PIPE
     )
 
-    return {'stdout': process.stdout.decode('utf-8'),
-            'stderr': process.stderr.decode('utf-8'),
-            'returncode': process.returncode
-            }
+    return SimpleNamespace(
+        stdout=process.stdout.decode('utf-8'),
+        stderr=process.stderr.decode('utf-8'),
+        returncode=process.returncode
+    )
 
 
 def main(args):
@@ -32,7 +34,7 @@ def main(args):
         print(str(spawn("python -m venv .venv")))
 
     os.chdir(script_directory)
-    stdout = spawn(".venv/bin/pip freeze")['stdout']
+    stdout = spawn(".venv/bin/pip freeze").stdout
     # print(f'stdout == {stdout}')
 
     if not stdout:
