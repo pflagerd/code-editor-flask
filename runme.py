@@ -28,18 +28,7 @@ def main(args):
     script_directory = os.path.dirname(os.path.abspath(__file__))
     # print(script_directory)  # Does script_directory contain a trailing '/'?  No.
     if not os.path.exists(script_directory + "/.venv"):  # if
-        # cd script_directory
         os.chdir(script_directory)
-        # # python -m venv .venv
-        # process = subprocess.run(
-        #     "python -m venv .venv".split(),
-        #     stdout=subprocess.PIPE,
-        #     stderr=subprocess.PIPE
-        # )
-        #
-        # print(process.stdout.decode('utf-8'))
-        # print(process.stderr.decode('utf-8'))
-        # print(process.returncode)
         print(str(spawn("python -m venv .venv")))
 
     os.chdir(script_directory)
@@ -48,28 +37,9 @@ def main(args):
 
     if not stdout:
         os.chdir(script_directory)
-        # python -m venv .venv
-        process = subprocess.run(
-            ".venv/bin/pip install -r ./requirements.txt".split(),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-        )
+        print(spawn(".venv/bin/pip freeze"))
 
-        print(process.stdout.decode('utf-8'))
-        print(process.stderr.decode('utf-8'))
-        print(process.returncode)
-
-        os.chdir(script_directory)
-        # python -m venv .venv
-        process = subprocess.run(
-            ".venv/bin/python ./code-editor-flask.py".split(),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-        )
-
-        print(process.stdout.decode('utf-8'))
-        print(process.stderr.decode('utf-8'))
-        print(process.returncode)
+        spawn(".venv/bin/python ./code-editor-flask.py")
 
     os.system("open http://localhost:5000")
     os.execvp(".venv/bin/python", [".venv/bin/python", "./code-editor-flask.py"])
