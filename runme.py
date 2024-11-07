@@ -32,13 +32,15 @@ def main(args):
     os.chdir(script_directory)
     # print(script_directory)  # Does script_directory contain a trailing '/'?  No.
     if not os.path.exists(script_directory + "/.venv"):  # if
-        print(str(spawn("python -m venv .venv")))
+        spawn_result = spawn("python -m venv .venv")
+        print(spawn_result)
 
     stdout = spawn(".venv/bin/pip freeze").stdout
     # print(f'stdout == {stdout}')
 
     if not stdout:
-        print(spawn(".venv/bin/pip install -r requirements.txt"))
+        spawn_result = spawn(".venv/bin/pip install -r requirements.txt")
+        print(spawn_result)
 
     os.system("open http://localhost:5000")
     # time.sleep(5)  # browser appears even to wait long enough if I introduce an artifical pause.
