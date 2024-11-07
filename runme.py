@@ -2,6 +2,7 @@
 import os
 import sys
 import subprocess
+import time
 from types import SimpleNamespace
 
 
@@ -40,6 +41,7 @@ def main(args):
         print(spawn(".venv/bin/pip install -r requirements.txt"))
 
     os.system("open http://localhost:5000")
+    # time.sleep(5)  # browser appears even to wait long enough if I introduce an artifical pause.
     os.execvp(".venv/bin/python", [".venv/bin/python", "./code-editor-flask.py"])
 
 
