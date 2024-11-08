@@ -35,6 +35,8 @@ def main(args, debug=False):
         print(script_directory)  # Does script_directory contain a trailing '/'?  No.
     if not os.path.exists(script_directory + "/.venv"):  # if
         spawn_result = spawn("python3 -m venv .venv")
+        if spawn_result.returncode:
+            raise RuntimeError("python3 -m venv .venv failed: " + spawn_result.stderr)
         if debug:
             print(spawn_result)
 
