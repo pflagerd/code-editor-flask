@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os
 import sys
 import subprocess
@@ -34,7 +34,7 @@ def main(args, debug=False):
     if debug:
         print(script_directory)  # Does script_directory contain a trailing '/'?  No.
     if not os.path.exists(script_directory + "/.venv"):  # if
-        spawn_result = spawn("python -m venv .venv")
+        spawn_result = spawn("python3 -m venv .venv")
         if debug:
             print(spawn_result)
 
@@ -49,7 +49,7 @@ def main(args, debug=False):
 
     spawn("open http://localhost:5000")
     # time.sleep(5)  # browser appears even to wait long enough if I introduce an artifical pause.
-    os.execvp(".venv/bin/python", [".venv/bin/python", "./code-editor-flask.py"])
+    os.execvp(".venv/bin/python3", [".venv/bin/python3", "./code-editor-flask.py"])
 
 
 if __name__ == "__main__":

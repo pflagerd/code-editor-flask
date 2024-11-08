@@ -1,5 +1,5 @@
 #!/bin/bash
-if ! (which python >/dev/null && python --version | grep ' 3.' >/dev/null); then
+if ! (which python3 >/dev/null && python3 --version | grep ' 3.' >/dev/null); then
   echo "You must have python 3 installed to run this."
   exit 1
 fi
