@@ -19,22 +19,12 @@ Move to code-editor-flask repository
 
 ​	`cd path/to/code-editor-flask`
 
-Create a `.venv` virtual environment
+Type
 
-​	`python -m venv .venv`
-
-Activate the `.venv`
-
-​	`source .venv/bin/activate`
-
-Install required packages from `requirements.txt`
-
-​	`pip install -r ./requirements.txt`
-
-Run `code-editor-flask.py` (runs `code-editor-flask.py` in a flask web server)
-```bash
-python ./code-editor-flask.py
+```commandline
+./RUNME
 ```
+
 You should see something like:
 ```
  * Serving Flask app 'app'
