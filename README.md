@@ -25,7 +25,7 @@ Type
 ./RUNME
 ```
 
-You should see something like:
+In the shell from which you just executed `./RUNME` you should see something like:
 ```
  * Serving Flask app 'app'
  * Debug mode: on
@@ -41,8 +41,6 @@ Press CTRL+C to quit
 127.0.0.1 - - [25/Oct/2024 09:33:03] "POST /run HTTP/1.1" 200 -
 ```
 
-From a browser navigate to `http://127.0.0.1:5000` (or whatever Flask said when you ran it.)
-
-You should see something like this:
+In a new browser window or tab, you should see something like this:
 
 ![Online Editor](./images/screenshot.png)
