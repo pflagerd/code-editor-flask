@@ -45,4 +45,4 @@ From a browser navigate to `http://127.0.0.1:5000` (or whatever Flask said when 
 
 You should see something like this:
 
-![Online Editor](./images/screenshot.png)
+![Online Editor](https://github.com/user-attachments/assets/b2646db1-d179-4a7a-9c33-c5920558a2a0)
