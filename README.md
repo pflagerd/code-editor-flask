@@ -11,7 +11,7 @@ Here's an overview of the components we'll need:
   
 
 ## Setup
-You must have python and git.
+You must have python3 and git.
 
 | OS | git | python |
 | -------- | -------- | -------- |
