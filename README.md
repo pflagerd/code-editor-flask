@@ -15,7 +15,7 @@ You must have python3 and git.
 
 | OS | git | python |
 | -------- | -------- | -------- |
-| kubuntu 24.04.1 LTS   | 2.43.0   | Python 3.12.3   |
+| kubuntu 24.04.1 LTS   | 2.43.0, 2.45.2   | Python 3.12.3   |
 | macOS Sequoia 15.1.1   | 2.39.5 (Apple Git-154)   | Python 3.12.7   |
 
 Git clone current repo to your local machine
