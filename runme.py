@@ -61,7 +61,7 @@ def main(args, debug=False):
         if debug:
             print(spawn_result)
 
-    spawn("open http://localhost:5000")
+    spawn("open http://127.0.0.1:5000")
     # time.sleep(5)  # browser appears even to wait long enough if I introduce an artifical pause.
     os.execvp(".venv/bin/python3", [".venv/bin/python3", "./code-editor-flask.py"])
 
