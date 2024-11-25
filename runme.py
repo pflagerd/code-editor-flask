@@ -1,24 +1,33 @@
 #!/usr/bin/env python3
 import os
-import sys
+import os.path
 import subprocess
+import sys
 import time
 from types import SimpleNamespace
 
 
-def spawn(command_line):
-    process = subprocess.run(
-        command_line.split(),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE
-    )
 
-    return SimpleNamespace(
-        stdout=process.stdout.decode('utf-8'),
-        stderr=process.stderr.decode('utf-8'),
-        returncode=process.returncode
-    )
 
+def if_kubuntu_venv_not_installed_install_it_now():
+    if not is_kubuntu():
+        return
+
+    # is venv installed?
+    # Do something like this bash command: sudo apt list --installed | grep python3-venv3
+    if "python3-venv3" in spawn("sudo apt list --installed").stdout:
+        return
+
+    response = spawn("sudo apt install python3-venv -y")
+    if response.returncode:
+        raise(RuntimeError, "Something went wrong: " + response.stderr)
+
+
+def is_kubuntu():
+    if not os.path.exists("/etc/os-release"):
+        return False
+
+    return "Ubuntu" in open("/etc/os-release").read()
 
 def main(args, debug=False):
     if sys.version_info < (3, 12, 3):
@@ -33,6 +42,10 @@ def main(args, debug=False):
     os.chdir(script_directory)
     if debug:
         print(script_directory)  # Does script_directory contain a trailing '/'?  No.
+
+    if_kubuntu_venv_not_installed_install_it_now()
+
+
     if not os.path.exists(script_directory + "/.venv"):  # if
         spawn_result = spawn("python3 -m venv .venv")
         if spawn_result.returncode:
@@ -52,6 +65,22 @@ def main(args, debug=False):
     spawn("open http://localhost:5000")
     # time.sleep(5)  # browser appears even to wait long enough if I introduce an artifical pause.
     os.execvp(".venv/bin/python3", [".venv/bin/python3", "./code-editor-flask.py"])
+
+
+def spawn(command_line):
+    process = subprocess.run(
+        command_line.split(),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE
+    )
+
+    return SimpleNamespace(
+        stdout=process.stdout.decode('utf-8'),
+        stderr=process.stderr.decode('utf-8'),
+        returncode=process.returncode
+    )
+
+
 
 
 if __name__ == "__main__":
