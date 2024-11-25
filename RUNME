@@ -4,4 +4,4 @@ if ! (which python3 >/dev/null && python3 --version | grep ' 3.' >/dev/null); th
   exit 1
 fi
 
-python $(dirname "$(readlink -f "$0")")/runme.py
+python3 $(dirname "$(readlink -f "$0")")/runme.py
