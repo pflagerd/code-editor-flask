@@ -7,18 +7,16 @@ import time
 from types import SimpleNamespace
 
 
-
-
-def if_kubuntu_venv_not_installed_install_it_now():
+def if_kubuntu_package_not_installed_install_it_now(package):
     if not is_kubuntu():
         return
 
-    # is venv installed?
+    # is package installed?
     # Do something like this bash command: sudo apt list --installed | grep python3-venv3
-    if "python3-venv3" in spawn("sudo apt list --installed").stdout:
+    if package in spawn("sudo apt list --installed").stdout:
         return
 
-    response = spawn("sudo apt install python3-venv -y")
+    response = spawn(f"sudo apt install {package} -y")
     if response.returncode:
         raise(RuntimeError, "Something went wrong: " + response.stderr)
 
@@ -43,8 +41,8 @@ def main(args, debug=False):
     if debug:
         print(script_directory)  # Does script_directory contain a trailing '/'?  No.
 
-    if_kubuntu_venv_not_installed_install_it_now()
-
+    if_kubuntu_package_not_installed_install_it_now("python3-pip")
+    if_kubuntu_package_not_installed_install_it_now("python3-venv")
 
     if not os.path.exists(script_directory + "/.venv"):  # if
         spawn_result = spawn("python3 -m venv .venv")
