@@ -27,6 +27,7 @@ def is_kubuntu():
 
     return "Ubuntu" in open("/etc/os-release").read()
 
+
 def main(args, debug=False):
     if sys.version_info < (3, 12, 3):
         print("Current version " + sys.version.split()[0] + " is too old.  Must be 3.12.3 or later.", file=sys.stderr)
@@ -77,8 +78,6 @@ def spawn(command_line):
         stderr=process.stderr.decode('utf-8'),
         returncode=process.returncode
     )
-
-
 
 
 if __name__ == "__main__":
