@@ -29,8 +29,10 @@ def is_kubuntu():
 
 
 def main(args, debug=False):
-    if sys.version_info < (3, 12, 3):
-        print("Current version " + sys.version.split()[0] + " is too old.  Must be 3.12.3 or later.", file=sys.stderr)
+    supported_python_versions = [(3, 6, 9), (3, 12, 3)]
+    print(sys.version_info)
+    if (sys.version_info.major, sys.version_info.minor, sys.version_info.micro) not in supported_python_versions:
+        print("Current version " + sys.version.split()[0] + " not tested.  Must be one of " + version_info_tuple_to_str(supported_python_versions), file=sys.stderr)
         sys.exit(1)
 
     if debug:
@@ -65,6 +67,13 @@ def main(args, debug=False):
     # time.sleep(5)  # browser appears even to wait long enough if I introduce an artifical pause.
     os.execvp(".venv/bin/python3", [".venv/bin/python3", "./code-editor-flask.py"])
 
+def version_info_tuple_to_str(version_info_tuple):
+    s = ""
+    for version_info in version_info_tuple:
+        if s:
+            s += ", "
+        s += str(version_info[0]) + "." + str(version_info[1]) + "." + str(version_info[2])
+    return s
 
 def spawn(command_line):
     process = subprocess.run(
