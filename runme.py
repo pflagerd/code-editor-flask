@@ -29,7 +29,7 @@ def is_kubuntu():
 
 
 def main(args, debug=False):
-    supported_python_versions = [(3, 6, 9), (3, 12, 3)]
+    supported_python_versions = [(3, 6, 8), (3, 12, 3)]
     print(sys.version_info)
     if (sys.version_info.major, sys.version_info.minor, sys.version_info.micro) not in supported_python_versions:
         print("Current version " + sys.version.split()[0] + " not tested.  Must be one of " + version_info_tuple_to_str(supported_python_versions), file=sys.stderr)
