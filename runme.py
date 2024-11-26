@@ -67,14 +67,6 @@ def main(args, debug=False):
     # time.sleep(5)  # browser appears even to wait long enough if I introduce an artifical pause.
     os.execvp(".venv/bin/python3", [".venv/bin/python3", "./code-editor-flask.py"])
 
-def version_info_tuple_to_str(version_info_tuple):
-    s = ""
-    for version_info in version_info_tuple:
-        if s:
-            s += ", "
-        s += str(version_info[0]) + "." + str(version_info[1]) + "." + str(version_info[2])
-    return s
-
 def spawn(command_line):
     process = subprocess.run(
         command_line.split(),
@@ -87,6 +79,14 @@ def spawn(command_line):
         stderr=process.stderr.decode('utf-8'),
         returncode=process.returncode
     )
+
+def version_info_tuple_to_str(version_info_tuple):
+    s = ""
+    for version_info in version_info_tuple:
+        if s:
+            s += ", "
+        s += str(version_info[0]) + "." + str(version_info[1]) + "." + str(version_info[2])
+    return s
 
 
 if __name__ == "__main__":
