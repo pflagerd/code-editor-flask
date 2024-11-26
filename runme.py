@@ -20,6 +20,11 @@ def if_kubuntu_package_not_installed_install_it_now(package):
     if response.returncode:
         raise(RuntimeError, "Something went wrong: " + response.stderr)
 
+def is_gnome():
+    desktop = os.environ.get("XDG_CURRENT_DESKTOP", "").lower()
+    session = os.environ.get("GDMSESSION", "").lower()
+    return "gnome" in desktop or "gnome" in session
+
 
 def is_kubuntu():
     if not os.path.exists("/etc/os-release"):
@@ -29,8 +34,7 @@ def is_kubuntu():
 
 
 def main(args, debug=False):
-    supported_python_versions = [(3, 6, 8), (3, 12, 3)]
-    print(sys.version_info)
+    supported_python_versions = [(3, 12, 3), (3, 13, 0)]
     if (sys.version_info.major, sys.version_info.minor, sys.version_info.micro) not in supported_python_versions:
         print("Current version " + sys.version.split()[0] + " not tested.  Must be one of " + version_info_tuple_to_str(supported_python_versions), file=sys.stderr)
         sys.exit(1)
@@ -63,8 +67,10 @@ def main(args, debug=False):
         if debug:
             print(spawn_result)
 
-    spawn("open http://127.0.0.1:5000")  # safari doesn't like http://localhost:5000
-    # time.sleep(5)  # browser appears even to wait long enough if I introduce an artifical pause.
+    if is_gnome():
+        subprocess.Popen(["gio", "open", "http://127.0.0.1:5000"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    else:
+        spawn("open http://127.0.0.1:5000")  # safari doesn't like http://localhost:5000
     os.execvp(".venv/bin/python3", [".venv/bin/python3", "./code-editor-flask.py"])
 
 def spawn(command_line):
