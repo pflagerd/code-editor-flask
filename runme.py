@@ -67,10 +67,12 @@ def main(args, debug=False):
         if debug:
             print(spawn_result)
 
+    # NOTE: safari doesn't like http://localhost:5000
     if is_gnome():
-        subprocess.Popen(["gio", "open", "http://127.0.0.1:5000"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.Popen(["gio", "open", "http://127.0.0.1:5000"])
     else:
-        spawn("open http://127.0.0.1:5000")  # safari doesn't like http://localhost:5000
+        subprocess.Popen(["open", "http://127.0.0.1:5000"])
+        #was: spawn("open http://127.0.0.1:5000")
     os.execvp(".venv/bin/python3", [".venv/bin/python3", "./code-editor-flask.py"])
 
 def spawn(command_line):
@@ -90,6 +92,7 @@ def version_info_tuple_to_str(version_info_tuple):
     s = ""
     for version_info in version_info_tuple:
         if s:
+            s += ", "
             s += ", "
         s += str(version_info[0]) + "." + str(version_info[1]) + "." + str(version_info[2])
     return s
