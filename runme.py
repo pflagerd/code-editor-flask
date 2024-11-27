@@ -67,12 +67,15 @@ def main(args, debug=False):
         if debug:
             print(spawn_result)
 
-    # NOTE: safari doesn't like http://localhost:5000
-    if is_gnome():
-        subprocess.Popen(["gio", "open", "http://127.0.0.1:5000"])
-    else:
+
+    if not spawn('which open').returncode:
         subprocess.Popen(["open", "http://127.0.0.1:5000"])
         #was: spawn("open http://127.0.0.1:5000")
+    elif not spawn('which gio').returncode:
+        subprocess.Popen(["gio", "open", "http://127.0.0.1:5000"])
+    else:
+        print('Neither open nor gio is available in your PATH, cannot launch default browser', file=sys.stderr)
+
     os.execvp(".venv/bin/python3", [".venv/bin/python3", "./code-editor-flask.py"])
 
 def spawn(command_line):
