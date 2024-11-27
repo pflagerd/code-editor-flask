@@ -20,12 +20,6 @@ def if_kubuntu_package_not_installed_install_it_now(package):
     if response.returncode:
         raise(RuntimeError, "Something went wrong: " + response.stderr)
 
-def is_gnome():
-    desktop = os.environ.get("XDG_CURRENT_DESKTOP", "").lower()
-    session = os.environ.get("GDMSESSION", "").lower()
-    return "gnome" in desktop or "gnome" in session
-
-
 def is_kubuntu():
     if not os.path.exists("/etc/os-release"):
         return False
