@@ -18,7 +18,7 @@ def if_kubuntu_package_not_installed_install_it_now(package):
 
     response = spawn(f"sudo apt install {package} -y")
     if response.returncode:
-        raise(RuntimeError, "Something went wrong: " + response.stderr)
+        raise RuntimeError("Something went wrong: " + response.stderr)
 
 def is_kubuntu():
     if not os.path.exists("/etc/os-release"):
