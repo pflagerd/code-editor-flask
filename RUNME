@@ -22,10 +22,10 @@ if ! [ -x ./python ]; then
 	make -j 7
 fi
 
-popd
-
-if ! [ -x ./bin/python3 ]; then
+if ! [ -x ../bin/python3 ]; then
 	make install
 fi
+
+popd
 
 ./bin/python3 $(dirname "$(readlink -f "$0")")/runme.py
