@@ -23,7 +23,7 @@ Git clone current repo to your local machine
 
 ​	`git clone https://github.com/pflagerd/code-editor-flask.git`
 
-Move to code-editor-flask repository
+Change your working directory to code-editor-flask repository
 
 ​	`cd path/to/code-editor-flask`
 
