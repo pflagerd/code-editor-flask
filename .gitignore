@@ -1,2 +1,7 @@
 Python-3.12.8.tgz
 *.swp
+Python-3.12.8/
+bin/
+include/
+lib/
+share/
