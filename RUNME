@@ -15,7 +15,7 @@ sudo apt -y install build-essential zlib1g-dev libncurses5-dev libdb-dev libgdbm
 pushd Python-3.12.8
 
 if ! [ -f ./Makefile ]; then
-	./configure --prefix=/home/oy753c/code-editor-flask
+	./configure --prefix=$HOME/code-editor-flask
 fi
 
 if ! [ -x ./python ]; then
