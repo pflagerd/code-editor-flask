@@ -1,7 +1,31 @@
 #!/bin/bash
-if ! (which python3 >/dev/null && python3 --version | grep ' 3.' >/dev/null); then
-  echo "You must have python 3 installed to run this."
-  exit 1
+
+if ! [ -f ./Python-3.12.8.tgz ]; then
+	echo wget https://www.python.org/ftp/python/3.12.8/Python-3.12.8.tgz
+	wget https://www.python.org/ftp/python/3.12.8/Python-3.12.8.tgz
 fi
 
-python3 $(dirname "$(readlink -f "$0")")/runme.py
+if ! [ -d Python-3.12.8 ]; then
+	echo tar xf Python-3.12.8.tgz
+	tar xf Python-3.12.8.tgz
+fi
+
+sudo apt -y install build-essential zlib1g-dev libncurses5-dev libdb-dev libgdbm-compat-dev libdb5.3-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev libbz2-dev liblzma-dev tk-dev uuid-dev
+
+pushd Python-3.12.8
+
+if ! [ -f ./Makefile ]; then
+	./configure --prefix=/home/oy753c/code-editor-flask
+fi
+
+if ! [ -x ./python ]; then
+	make -j 7
+fi
+
+popd
+
+if ! [ -x ./bin/python3 ]; then
+	make install
+fi
+
+./bin/python3 $(dirname "$(readlink -f "$0")")/runme.py
