@@ -39,9 +39,21 @@
         }
 
         .button-container {
+            height: 50px; /* Fixed height */
+            display: flex;
+            background-color: #c0c0c0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .editor-output-container {
+            flex-grow: 1;
+            background-color: #e0e0e0;
+            /* Added for visualization */
             display: flex;
         }
 
@@ -81,15 +93,17 @@
     </style>
 </head>
 <body>
-    <div class="editor-output-container">
-        <div id="editor" contenteditable="true"></div>
-        <div id="output"></div>
-    </div>
-    <div class="button-container">
-        <button class="black-button" id="runButton">
-            <span id="buttonText">Run Code</span>
-            <i class="fas fa-circle-notch fa-spin" id="loadingIcon" style="display: none; margin-left: 10px;"></i>
-        </button>  
+    <div class="container">
+        <div class="editor-output-container">
+            <div id="editor" contenteditable="true"></div>
+            <div id="output"></div>
+        </div>
+        <div class="button-container">
+            <button class="black-button" id="runButton">
+                <span id="buttonText">Run Code</span>
+                <i class="fas fa-circle-notch fa-spin" id="loadingIcon" style="display: none; margin-left: 10px;"></i>
+            </button>
+        </div>
     </div>
 
     <script>
