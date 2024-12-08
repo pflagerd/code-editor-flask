@@ -10,6 +10,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         .black-button { /* Black background */
             color: black;
             background-color: #f0f0f0; /* White text */
@@ -32,7 +38,10 @@
             transform: scale(0.98);    /* Slightly shrink the button on click */
         }
 
-        .container {
+        .button-container {
+        }
+
+        .editor-output-container {
             display: flex;
         }
 
@@ -72,11 +81,11 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="editor-output-container">
         <div id="editor" contenteditable="true"></div>
         <div id="output"></div>
     </div>
-    <div class="btn-container">
+    <div class="button-container">
         <button class="black-button" id="runButton">
             <span id="buttonText">Run Code</span>
             <i class="fas fa-circle-notch fa-spin" id="loadingIcon" style="display: none; margin-left: 10px;"></i>
