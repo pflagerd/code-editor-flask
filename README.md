@@ -23,7 +23,7 @@ Git clone current repo to your local machine
 
 ​	`git clone https://github.com/pflagerd/code-editor-flask.git`
 
-Move to code-editor-flask repository
+Change your working directory to code-editor-flask repository
 
 ​	`cd path/to/code-editor-flask`
 
@@ -52,3 +52,7 @@ Press CTRL+C to quit
 In a new browser window or tab, you should see something like this:
 
 ![Online Editor](https://github.com/user-attachments/assets/b2646db1-d179-4a7a-9c33-c5920558a2a0)
+
+
+## TODO
+  https://github.com/pflagerd/code-editor-flask/issues/32
