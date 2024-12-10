@@ -17,9 +17,20 @@ def run_code():
     redirected_output = sys.stdout = StringIO()
     
     try:
+        r, w = os.pipe()
+        stdout_fd = os.dup(1)
+        os.dup2(w, 1)
         exec(code)
+        os.dup2(stdout_fd, 1)
+        os.close(w)
+        os.close(stdout_fd)
         sys.stdout = old_stdout
-        return jsonify({'output': redirected_output.getvalue()})
+        with os.fdopen(r) as pipe:
+            output = pipe.read()
+        print("HERE", file=sys.stderr)
+        print(output, file=sys.stderr)
+        os.close(r)
+        return jsonify({'output': output})
     except Exception as e:
         sys.stdout = old_stdout
         return jsonify({'output': str(e)})
