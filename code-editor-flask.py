@@ -22,7 +22,7 @@ def run_code():
     
         try:
             process = subprocess.Popen(
-                ["python3", "-u", temp.name],
+                ["python3", "-u", temp.name], # The "-u" option disables python's stdout/stderr buffering, which preserves the order of I/O when intermixing print() with os.system("ls") (for example)
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
