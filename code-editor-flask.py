@@ -22,7 +22,7 @@ def run_code():
     
         try:
             process = subprocess.Popen(
-                ["python3", temp.name],
+                ["python3", "-u", temp.name],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
