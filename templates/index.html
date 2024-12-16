@@ -121,6 +121,7 @@
                 data: JSON.stringify({code: code}),
                 success: function(response) {
                     $("#output").text(response.output);
+                    $("#buttonText").text("Cancel");
                 }
             });
         });
