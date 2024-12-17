@@ -27,7 +27,7 @@
             align-items: center;       /* Center the content vertically */
             font-size: 14px;
             font-weight: bold;         /* Font size */        /* Bold text */
-            margin: 4px 0 6px 0;       /* Margin */
+            margin: 4px;               /* Margin */
             cursor: pointer;           /* Pointer/hand icon */
             border-radius: 5px;        /* Rounded corners */
             transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
@@ -108,27 +108,49 @@
     </div>
 
     <script>
-        var editor = ace.edit("editor");
+        let editor = ace.edit("editor");
         editor.setTheme("ace/theme/monokai");
         editor.session.setMode("ace/mode/python");
 
+        let state = "Editing"; // also "Running"
+
         $("#runButton").click(function() {
-            var code = editor.getValue();
-            $.ajax({
-                url: '/run',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({code: code}),
-                success: function(response) {
-                    $("#output").text(response.output);
-                    $("#buttonText").text("Cancel");
-                }
-            });
+            if (state === "Editing") {
+                state = "Running";
+                $("#buttonText").text("Cancel");
+
+                $.ajax({
+                    url: '/run',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({code: editor.getValue()}),
+                    success: function(response) {
+                        state = "Editing";
+                        $("#buttonText").text("Run Code");
+                        $("#output").text(response.output);
+                    }
+                });
+            }
+            else {
+                state = "Editing";
+                $("#buttonText").text("Run Code");
+
+                $.ajax({
+                    url: '/cancel',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({code: code}),
+                    success: function(response) {
+                        $("#output").text(response.output);
+                    }
+                });
+            }
         });
     </script>
+
     <script>
         document.getElementById("runButton").addEventListener("click", function() {
-            var loadingIcon = document.getElementById("loadingIcon");
+            let loadingIcon = document.getElementById("loadingIcon");
 
             // Show the loading icon
             loadingIcon.style.display = "inline-block";
