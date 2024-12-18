@@ -3,7 +3,7 @@ Code editor written in HTML and CSS using FLask
 
 
 ## TODO
-  https://github.com/pflagerd/code-editor-flask/issues/37
+  https://github.com/pflagerd/code-editor-flask/issues/36
 
 
 ## Overview
