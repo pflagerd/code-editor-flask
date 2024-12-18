@@ -1,6 +1,11 @@
 # code-editor-flask
 Code editor written in HTML and CSS using FLask
 
+
+## TODO
+  https://github.com/pflagerd/code-editor-flask/issues/37
+
+
 ## Overview
 Here's an overview of the components we'll need:
 
@@ -52,11 +57,3 @@ Press CTRL+C to quit
 In a new browser window or tab, you should see something like this:
 
 ![Online Editor](https://github.com/user-attachments/assets/b2646db1-d179-4a7a-9c33-c5920558a2a0)
-
-#TODO
-
-Issue #36
-
-
-## TODO
-  https://github.com/pflagerd/code-editor-flask/issues/32
