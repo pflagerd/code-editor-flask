@@ -125,6 +125,8 @@
                     contentType: 'application/json',
                     data: JSON.stringify({code: editor.getValue()}),
                     success: function(response) {
+                        state = "Editing";
+                        $("#buttonText").text("Run Code");
                         $("#output").text(response.output);
                     }
                 });

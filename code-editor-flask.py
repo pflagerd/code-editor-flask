@@ -14,6 +14,7 @@ def index():
 
 @app.route('/cancel', methods=['POST'])
 def cancel():
+    print("cancel")
     pass
 
 @app.route('/run', methods=['POST'])
