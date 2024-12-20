@@ -63,14 +63,14 @@ def main(args, debug=False):
 
 
     if not spawn('which open').returncode:
-        subprocess.Popen(["open", "http://127.0.0.1:5000"])
+        subprocess.Popen(["open", "http://127.0.0.1:8000"])
         #was: spawn("open http://127.0.0.1:5000")
     elif not spawn('which gio').returncode:
-        subprocess.Popen(["gio", "open", "http://127.0.0.1:5000"])
+        subprocess.Popen(["gio", "open", "http://127.0.0.1:8000"])
     else:
         print('Neither open nor gio is available in your PATH, cannot launch default browser', file=sys.stderr)
 
-    os.execvp(".venv/bin/python3", [".venv/bin/python3", "./code-editor-flask.py"])
+    os.execvp(".venv/bin/uvicorn", [".venv/bin/uvicorn", "code-editor-flask:app", "--reload", "--log-level", "trace"])
 
 def spawn(command_line):
     process = subprocess.run(
