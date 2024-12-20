@@ -1,46 +1,58 @@
-from flask import Flask, request, jsonify, render_template
-from flask_cors import CORS
-import os
-import sys
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.templating import Jinja2Templates
 import subprocess
 import tempfile
 
-app = Flask(__name__)
-CORS(app)
+app = FastAPI()
 
-@app.route('/')
+# Set up CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Template rendering setup
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
 def index():
-    return render_template('index.html')
+    return templates.TemplateResponse("index.html", {"request": {}})
 
-@app.route('/cancel', methods=['POST'])
-def cancel():
-    print("cancel")
-    pass
+@app.post("/run")
+async def run_code(request: Request):
+    try:
+        data = await request.json()
+        code = data.get("code")
 
-@app.route('/run', methods=['POST'])
-def run_code():
-    code = request.json['code']
+        if not code:
+            raise HTTPException(status_code=400, detail="No code provided.")
 
-    with tempfile.NamedTemporaryFile() as temp:
-        temp.write(code.encode('utf-8'))
-        temp.flush()
-    
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".py") as temp:
+            temp.write(code.encode("utf-8"))
+            temp.flush()
+            temp_file_name = temp.name
+
         try:
             process = subprocess.Popen(
-                ["python3", "-u", temp.name], # The "-u" option disables python's stdout/stderr buffering, which preserves the order of I/O when intermixing print() with os.system("ls") (for example)
+                ["python3", "-u", temp_file_name],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
 
             stdout, stderr = process.communicate()
 
-            print(stdout.decode('utf-8'))
-            print(stderr.decode('utf-8'))
-            print(process.returncode)
+            output = stdout.decode("utf-8") + stderr.decode("utf-8")
+            return JSONResponse(content={"output": output, "returncode": process.returncode})
 
-            return jsonify({'output': stdout.decode('utf-8')})
-        except Exception as e:
-            return jsonify({'output': str(e)})
+        finally:
+            os.unlink(temp_file_name)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Run the app using a command like: uvicorn filename:app --reload
